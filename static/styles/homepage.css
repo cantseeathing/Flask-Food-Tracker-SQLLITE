@@ -1,0 +1,10 @@
+.adding_new_item {
+    border: 1px solid red;
+    width: 100vw;
+    height: max-content;
+    margin: 50px auto;
+}
+
+.adding_new_item_form {
+    margin: 0 auto;
+}

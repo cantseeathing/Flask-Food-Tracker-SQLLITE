@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/css_reset.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/navbar.css') }}">
+    {% block css_style %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+{% include 'nav_bar.html' %}
+
+<body>
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>

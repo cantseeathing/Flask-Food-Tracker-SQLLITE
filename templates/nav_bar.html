@@ -1,0 +1,7 @@
+<header class="page_navbar">
+    <ul draggable="true" class="navbar">
+        <li class="navbar_item {{ 'active' if request.path.split('/')[0] == 'tracker' else '' }}">Food Tracker</li>
+        <li class="navbar_item {{ 'active' if request.path.split('/')[0] == '' else '' }}">Home</li>
+        <li class="navbar_item {{ 'active' if request.path.split('/')[0] == 'add' else '' }}">Add Food Item</li>
+    </ul>
+</header>

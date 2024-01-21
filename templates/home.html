@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block css_style %}
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/homepage.css') }}">
+{% endblock %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="adding_new_item">
+        <form action="/submit" method="POST" class="adding_new_item_form">
+            <label class="adding_new_item_form" for="adding_new_item_input">
+                Date
+            </label>
+            <input type="date" id="adding_new_item_input">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+{% endblock %}
