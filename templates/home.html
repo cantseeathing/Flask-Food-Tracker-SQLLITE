@@ -10,12 +10,28 @@
 
 {% block content %}
     <div class="adding_new_item">
-        <form action="/submit" method="POST" class="adding_new_item_form">
+        <form action="{{ url_for('add_day') }}" method="GET" class="adding_new_item_form">
             <label class="adding_new_item_form" for="adding_new_item_input">
                 Date
             </label>
-            <input type="date" id="adding_new_item_input">
-            <input type="submit" value="Submit">
+            <input type="date" id="adding_new_item_input" name="date">
+            <input type="submit" value="Add!">
         </form>
+    </div>
+
+    <div>
+        {% if days_list|length == 0 %}
+            <h1>
+                No previous records, start recording by adding a new day!
+            </h1>
+        {% else %}
+            {% for days in days_list %}
+                <h1>Date: {{ days.date }}</h1>
+                <h1>Meals Count: {{ days.count }}</h1>
+                <h1>Total Protein: {{ days.protein }}</h1>
+                <h1>Total Carbohydrates: {{ days.carbs }}</h1>
+                <h1>Total Fat: {{ days.fat }}</h1>
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}

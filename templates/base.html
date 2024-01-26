@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/css_reset.css') }}">
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/navbar.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='assets/favicon.png') }}">
     {% block css_style %}{% endblock %}
     <title>{% block title %}{% endblock %}</title>
 </head>

@@ -1,7 +1,19 @@
-<header class="page_navbar">
-    <ul draggable="true" class="navbar">
-        <li class="navbar_item {{ 'active' if request.path.split('/')[0] == 'tracker' else '' }}">Food Tracker</li>
-        <li class="navbar_item {{ 'active' if request.path.split('/')[0] == '' else '' }}">Home</li>
-        <li class="navbar_item {{ 'active' if request.path.split('/')[0] == 'add' else '' }}">Add Food Item</li>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+<header class="page_navbar" draggable="true">
+    <h1 class="navbar_brand">Food Tracker</h1>
+    <ul class="navbar">
+        <a href="{{ url_for('home') }}">
+            <li class="navbar_item {{ 'active' if request.path.split('/')[1] == '' else '' }}">
+                <p><span>Home </span><img class="navbar_icons" src="{{ url_for('static', filename='assets/home.png') }}" alt="Home Icon" /></p>
+            </li>
+        </a>
+        <a href="{{ url_for('add_food') }}">
+            <li class="navbar_item {{ 'active' if request.path.split('/')[1] == 'add_food' else '' }}">
+                <p><span>Add Food Item </span><img class="navbar_icons" src="{{ url_for('static', filename='assets/add_food.png') }}" alt="Add Food Icon" /></p>
+            </li>
+        </a>
     </ul>
 </header>
