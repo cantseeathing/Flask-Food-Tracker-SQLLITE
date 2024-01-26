@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block css_style %}
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/add_food.css') }}">
+{% endblock %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="add_food_content">
+        <h1>Food Details</h1>
+    </div>
+    <div>
+        <form method="POST" action="{{ url_for('add_food') }}" >
+            <ul>
+                <li>
+                    <label for="food_name">Food Name</label>
+                    <input type="text" name="food_name" id="food_name">
+                </li>
+                <li>
+                    <label for="food_protein">Protein</label>
+                    <input type="text" name="food_protein" id="food_protein">
+                </li>
+                <li>
+                    <label for="food_carbs">Carbohydrates</label>
+                    <input type="text" name="food_carbs" id="food_carbs">
+                </li>
+                <li>
+                    <label for="food_fat">Fat</label>
+                    <input type="text" name="food_fat" id="food_fat">
+                </li>
+            </ul>
+            <input type="submit" value="Add">
+        </form>
+    </div>
+    <div>
+        <h1>Food Catalogue</h1>
+        {% for food in foods %}
+            <div>
+                <h2>{{ food.name }}</h2>
+                <h2>{{ food.protein }}</h2>
+                <h2>{{ food.carbohydrates }}</h2>
+                <h2>{{ food.fat }}</h2>
+                <form method="POST" action="{{ url_for('add_food') }}">
+                    <input type="text" value="{{ food.id }}" name="food_id" hidden>
+                    <input type="submit" value="Edit">
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
