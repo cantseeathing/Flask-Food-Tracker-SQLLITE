@@ -1,0 +1,61 @@
+.add_food_content {
+    margin: 30px auto;
+    width: 400px;
+    padding: 20px;
+    height: max-content;
+}
+
+.add_food_content_title {
+    background-color: #99BC85;
+    width: 100%;
+    height: max-content;
+    border: 1px solid black;
+    font-family: 'Permanent Marker', cursive;
+    & > h1 {
+        text-align: center;
+    }
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.add_food_content_details {
+    border: 1px solid black;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    & ul {
+        list-style: none;
+        & li {
+            margin: 5px;
+        }
+    }
+    & input {
+        text-align: center;
+        padding: 5px;
+        background-color: #BFD8AF;
+    }
+    & form {
+        margin: 0px;
+    }
+}
+
+.add_food_form_row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Permanent Marker', cursive;
+}
+
+.add_food_button {
+    width: 100%;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin: 0;
+    transition-duration: 0.2s;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 20px;
+    &:hover {
+        cursor: pointer;
+        background-color: #99BC85;
+    }
+}
