@@ -60,6 +60,18 @@ def home():
                            days_list=days_list)
 
 
+@app.route('/food_catalogue', methods=['GET'])
+def food_catalogue():
+    """
+    View all food in the FOODS table and edit any entry
+    """
+    db = get_db()
+    foods = helper.query_all_foods(db=db)
+    return render_template('food_catalogue.html',
+                           title='Add Food',
+                           foods=foods)
+
+
 @app.route('/add_food', methods=['GET', 'POST'])
 def add_food():
     """
@@ -84,12 +96,10 @@ def add_food():
         # # RETURN THE USER TO THE ADD FOOD PAGE
         return redirect(url_for('add_food'))
     # # GET REQUEST
-    else:
-        # # QUERY THE DB FOR ALL THE FOOD TYPES
-        foods = helper.query_all_foods(db=db)
-        return render_template('add_food.html',
-                               title='Add Food',
-                               foods=foods)
+    foods = helper.query_all_foods(db=db)
+    return render_template('add_food.html',
+                           title='Add Food',
+                           foods=foods)
 
 
 @app.route('/add_day', methods=['GET', 'POST'])
