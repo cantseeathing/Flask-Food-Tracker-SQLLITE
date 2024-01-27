@@ -40,24 +40,32 @@ def home():
     # # GET THE DB INSTANCE
     db = get_db()
     # # QUERY ALL THE DAYS FROM THE INTAKE TABLE IN THE DB
-    all_days = helper.query_all_days(db=db)
-    print([dict(x) for x in helper.query_all_foods(db=db)])
-    print(all_days)
-    days_list = []
-    print('here')
+    all_days = helper.get_all_dates(db=db)
+    all_days = helper.convert_result_to_dict(all_days)
+    days_data = []
     # # IF THE DB RETURN INTAKE DATES
     if len(all_days) != 0:
         # # CONVERT THE DATA TO A LIST OF DICTIONARIES
-        for days in all_days:
-            print('days: ', days)
-            days = dict(days)
-            aggregate = helper.aggregate_values(db=db, result=[days])
-            days.update(aggregate)
-            days_list.append(days)
-        print(days_list)
+        for day in all_days:
+            temp = dict()
+            temp['date'] = day.get('date')
+            temp['count'] = 0
+            temp['protein'] = 0
+            temp['calories'] = 0
+            temp['carbohydrates'] = 0
+            temp['fats'] = 0
+            foods_in_date = [x.get('food_id') for x in helper.convert_result_to_dict(helper.query_db_date(db=db, date=temp['date']))]
+            for food_id in foods_in_date:
+                food = dict(helper.query_food(db=db, food_id=food_id))
+                temp['count'] += 1
+                temp['protein'] += food['protein']
+                temp['calories'] += food['calories']
+                temp['carbohydrates'] += food['carbohydrates']
+                temp['fats'] += food['fat']
+            days_data.append(temp)
     return render_template('home.html',
                            title='Food Tracker App',
-                           days_list=days_list)
+                           days_data=days_data)
 
 
 @app.route('/food_catalogue', methods=['GET'])

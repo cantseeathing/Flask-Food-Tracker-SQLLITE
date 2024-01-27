@@ -9,29 +9,38 @@
 {% endblock %}
 
 {% block content %}
-    <div class="adding_new_item">
+    <div draggable="true" class="adding_new_item">
+        <h1 class="add_date_text">Select a date</h1>
         <form action="{{ url_for('add_day') }}" method="GET" class="adding_new_item_form">
-            <label class="adding_new_item_form" for="adding_new_item_input">
-                Date
-            </label>
-            <input type="date" id="adding_new_item_input" name="date">
-            <input type="submit" value="Add!">
+            <div>
+                <input type="date" id="adding_new_item_input" name="date">
+            </div>
+            <input class="add_new_date_button" type="submit" value="Add!">
         </form>
     </div>
 
     <div>
-        {% if days_list|length == 0 %}
-            <h1>
-                No previous records, start recording by adding a new day!
-            </h1>
+        {% if days_data|length == 0 %}
+            <a href="#adding_new_item_input">
+                <h1 draggable="true" class="no_record_text">
+                    No previous records, start recording by adding a new day!
+                </h1>
+            </a>
         {% else %}
-            {% for days in days_list %}
-                <h1>Date: {{ days.date }}</h1>
-                <h1>Meals Count: {{ days.count }}</h1>
-                <h1>Total Protein: {{ days.protein }}</h1>
-                <h1>Total Carbohydrates: {{ days.carbs }}</h1>
-                <h1>Total Fat: {{ days.fat }}</h1>
-            {% endfor %}
+            <div class="previous_days">
+                {% for days in days_data %}
+                    <a href="{{ url_for('add_day', date=days.date) }}">
+                        <div class="day_record" title="Click to edit this date data..">
+                            <h1 class="day_date">{{ days.date }}</h1>
+                            <h1>Meals Count: {{ days.count }}</h1>
+                            <h1>Total Protein: {{ days.protein }}</h1>
+                            <h1>Total Carbohydrates: {{ days.carbohydrates }}</h1>
+                            <h1>Total Fat: {{ days.fats }}</h1>
+                            <h1>Total Calories: {{ days.calories }}</h1>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
         {% endif %}
     </div>
 {% endblock %}
