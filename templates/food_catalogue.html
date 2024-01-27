@@ -17,20 +17,19 @@
         {% else %}
             <div class="food_items">
                 {% for food in foods %}
-                    <form method="POST" action="{{ url_for('add_food') }}">
-                        <input type="text" value="{{ food.id }}" name="food_id" hidden>
-                    </form>
-                    <div class="food_item">
-                        <h2 class="food_name">{{ food.name }}</h2>
-                        <h2>Protein: {{ food.protein }}</h2>
-                        <h2>|</h2>
-                        <h2>Carbohydrates: {{ food.carbohydrates }}</h2>
-                        <h2>|</h2>
-                        <h2>Fat: {{ food.fat }}</h2>
-                        <h2>|</h2>
-                        <h2>Calories: {{ food.calories }}</h2>
-                        <input class="edit_button" type="submit" value="Edit">
-                    </div>
+                    <a href="/edit_food/{{ food.id }}">
+                        <div class="food_item">
+                            <h2 class="food_name">{{ food.name }}</h2>
+                            <h2>Protein: {{ food.protein }}</h2>
+                            <h2>|</h2>
+                            <h2>Carbohydrates: {{ food.carbohydrates }}</h2>
+                            <h2>|</h2>
+                            <h2>Fat: {{ food.fat }}</h2>
+                            <h2>|</h2>
+                            <h2>Calories: {{ food.calories }}</h2>
+                            <input class="edit_button" type="submit" value="Edit">
+                        </div>
+                    </a>
                 {% endfor %}
             </div>
         {% endif %}

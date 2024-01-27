@@ -120,6 +120,21 @@ def query_food(db, food_id):
     return results
 
 
+def edit_food(**kwargs):
+    """
+    Edits food in the FOODS table using food_id
+    :param kwargs: db: DB connection instance, food_name, protein, carbs, fat, calories, food_id values
+    :return: 
+    """
+    db = kwargs.get('db')
+    db.execute(f"""
+        UPDATE FOODS
+            SET name = ?, protein = ?, carbohydrates = ?, fat = ?, calories = ?
+        WHERE id = ?
+    """, [kwargs['food_name'], kwargs['protein'], kwargs['carbs'], kwargs['fat'], kwargs['calories'], kwargs['food_id']])
+    db.commit()
+
+
 def delete_food(db, id: int, date: str):
     """
     Deletes food from the INTAKES table
