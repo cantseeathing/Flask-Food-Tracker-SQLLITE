@@ -10,6 +10,11 @@
                 <p><span>Home </span><img class="navbar_icons" src="{{ url_for('static', filename='assets/home.png') }}" alt="Home Icon" /></p>
             </li>
         </a>
+        <a href="{{ url_for('food_catalogue') }}">
+            <li class="navbar_item {{ 'active' if request.path.split('/')[1] == 'food_catalogue' else '' }}">
+                <p><span>Food Catalogue</span><img class="navbar_icons" src="{{ url_for('static', filename='assets/catalogue.png') }}" alt="Food Catalogue Icon" /></p>
+            </li>
+        </a>
         <a href="{{ url_for('add_food') }}">
             <li class="navbar_item {{ 'active' if request.path.split('/')[1] == 'add_food' else '' }}">
                 <p><span>Add Food Item </span><img class="navbar_icons" src="{{ url_for('static', filename='assets/add_food.png') }}" alt="Add Food Icon" /></p>

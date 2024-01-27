@@ -1,5 +1,5 @@
 .add_food_content {
-    margin: 30px auto;
+    margin: 100px auto;
     width: 400px;
     padding: 20px;
     height: max-content;
@@ -53,9 +53,13 @@
     margin: 0;
     transition-duration: 0.2s;
     font-family: 'Permanent Marker', cursive;
-    font-size: 20px;
+    font-size: 30px;
     &:hover {
         cursor: pointer;
         background-color: #99BC85;
     }
+}
+
+#food_cal:disabled {
+    color: black
 }

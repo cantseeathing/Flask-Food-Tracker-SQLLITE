@@ -72,6 +72,8 @@ def food_catalogue():
                            foods=foods)
 
 
+
+
 @app.route('/add_food', methods=['GET', 'POST'])
 def add_food():
     """
@@ -91,15 +93,13 @@ def add_food():
             food_protein = request.form.get('food_protein', type=int, default=0)
             food_carbs = request.form.get('food_carbs', type=int, default=0)
             food_fat = request.form.get('food_fat', type=int, default=0)
+            food_cals = request.form.get('food_cal', type=int, default=0)
             # # INSERT THE FOOD TO THE FOODS TABLE
-            helper.insert_food(food_name, food_protein, food_carbs, food_fat, db=db)
-        # # RETURN THE USER TO THE ADD FOOD PAGE
-        return redirect(url_for('add_food'))
-    # # GET REQUEST
-    foods = helper.query_all_foods(db=db)
+            helper.insert_food(food_name, food_protein, food_carbs, food_fat, food_cals, db=db)
+        # # RETURN THE USER TO THE FOOD CATALOGUE PAGE
+        return redirect(url_for('food_catalogue'))
     return render_template('add_food.html',
-                           title='Add Food',
-                           foods=foods)
+                           title='Add Food')
 
 
 @app.route('/add_day', methods=['GET', 'POST'])
