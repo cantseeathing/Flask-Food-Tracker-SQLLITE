@@ -13,7 +13,8 @@ def create_tables(db):
               name TEXT NOT NULL,
               protein INTEGER NOT NULL,
               carbohydrates INTEGER NOT NULL,
-              fat INTEGER NOT NULL )
+              fat INTEGER NOT NULL,
+              calories INTEGER NOT NULL  )
     ''')
     db.execute('''
         CREATE TABLE IF NOT EXISTS INTAKE
@@ -81,15 +82,15 @@ def query_all_foods(db) -> List:
 def insert_food(*args, **kwargs):
     """
     Inserts a new food type into the FOODS table
-    :param args: name, protein, carbohydrate, fat values of the food type
+    :param args: name, protein, carbohydrate, fat, and calories values of the food type
     :param kwargs: db: DB connection instance
     :return:
     """
     db = kwargs.get('db')
     db.execute("""
-        INSERT INTO FOODS (name, protein, carbohydrates, fat)
-        VALUES (?, ?, ?, ?)
-    """, [args[0], args[1], args[2], args[3]])
+        INSERT INTO FOODS (name, protein, carbohydrates, fat, calories)
+        VALUES (?, ?, ?, ?, ?)
+    """, [args[0], args[1], args[2], args[3], args[4]])
     # # COMMIT THE CHANGES TO THE DB
     db.commit()
 

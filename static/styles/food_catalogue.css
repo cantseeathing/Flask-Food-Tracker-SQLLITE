@@ -1,0 +1,66 @@
+html {
+    font-family: 'Permanent Marker', cursive;
+}
+
+.no_food {
+    margin: 300px auto;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 20px;
+    background-color: #99BC85;
+    width: max-content;
+    transition-duration: 0.2s;
+    &:hover {
+        cursor: pointer;
+        background-color: #BFD8AF;
+    }
+}
+
+.food_items {
+    margin: 50px auto;
+    width: 80vw;
+}
+
+.food_item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 20px;
+    transition-duration: 0.2s;
+    margin: 20px auto;
+    &:hover {
+        cursor: pointer;
+        background-color: #BFD8AF;
+        .food_name {
+            background-color: #BFD8AF;
+        }
+        .edit_button {
+            background-color: #BFD8AF;
+        }
+    }
+}
+
+.food_name {
+    background-color: #99BC85;
+    padding: 30px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    width: 200px;
+    text-align: center;
+    transition-duration: 0.2s;
+}
+
+.edit_button {
+    background-color: #99BC85;
+    border: 0px;
+    padding: 36px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    transition-duration: 0.2s;
+    &:hover {
+        cursor: pointer;
+    }
+}
