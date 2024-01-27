@@ -91,3 +91,13 @@
     border-bottom-left-radius: 25px;
     width: 250px;
 }
+
+.error_text {
+    margin: 150px auto;
+    background-color: #99BC85;
+    border-radius: 25px;
+    width: max-content;
+    padding: 30px;
+    font-size: 40px;
+    font-family: 'Permanent Marker', cursive;
+}

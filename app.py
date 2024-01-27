@@ -54,7 +54,8 @@ def home():
             temp['calories'] = 0
             temp['carbohydrates'] = 0
             temp['fats'] = 0
-            foods_in_date = [x.get('food_id') for x in helper.convert_result_to_dict(helper.query_db_date(db=db, date=temp['date']))]
+            foods_in_date = [x.get('food_id') for x in
+                             helper.convert_result_to_dict(helper.query_db_date(db=db, date=temp['date']))]
             for food_id in foods_in_date:
                 food = dict(helper.query_food(db=db, food_id=food_id))
                 temp['count'] += 1
@@ -101,7 +102,8 @@ def edit_food(food_id: int):
         food_fat = request.form.get('food_fat', type=int, default=0)
         food_cals = request.form.get('food_cal', type=int, default=0)
         # # EDIT FOODS TABLE
-        helper.edit_food(db=db, food_id=food_id, food_name=food_name, protein=food_protein, carbs=food_carbs, fat=food_fat, calories=food_cals)
+        helper.edit_food(db=db, food_id=food_id, food_name=food_name, protein=food_protein, carbs=food_carbs,
+                         fat=food_fat, calories=food_cals)
         return redirect(url_for('food_catalogue'))
     # # GET REQUEST
     food = dict(helper.query_food(db=db, food_id=food_id))
@@ -164,6 +166,12 @@ def add_day():
                            foods=foods,
                            result=result,
                            aggregate=aggregate)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template('404.html'), 404
 
 
 if __name__ == "__main__":
