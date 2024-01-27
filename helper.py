@@ -78,7 +78,7 @@ def query_all_foods(db) -> List:
     results = cursor.fetchall()
     return results
 
-
+print('requirments')
 def insert_food(*args, **kwargs):
     """
     Inserts a new food type into the FOODS table
