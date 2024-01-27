@@ -73,7 +73,7 @@ def query_all_foods(db) -> List:
     :param db: DB connection instance
     :return: List of all food
     """
-    cursor = db.execute("SELECT * FROM FOODS")
+    cursor = db.execute("SELECT * FROM FOODS ORDER BY name DESC")
     # # FETCH ALL THE RESULTS
     results = cursor.fetchall()
     return results
@@ -180,7 +180,8 @@ def aggregate_values(db, result: List) -> Dict:
         "count": 0,
         "fat": 0,
         "protein": 0,
-        "carbs": 0
+        "carbs": 0,
+        "calories": 0,
     }
     if len(result) == 0 or result[0] is None:
         return agg_values
@@ -190,4 +191,5 @@ def aggregate_values(db, result: List) -> Dict:
         agg_values["fat"] += temp_food.get('fat')
         agg_values["protein"] += temp_food.get('protein')
         agg_values["carbs"] += temp_food.get('carbohydrates')
+        agg_values["calories"] += temp_food.get('calories')
     return agg_values

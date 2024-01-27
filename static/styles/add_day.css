@@ -1,0 +1,109 @@
+html {
+    font-family: 'Permanent Marker', cursive;
+}
+
+.day_stats {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 50px auto;
+    width: 95vw;
+    border-radius: 25px;
+    & > h2 {
+        padding: 10px;
+    }
+}
+
+.stats_date {
+    background-color: #99BC85;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.add_food {
+    border: 1px solid black;
+    margin: 20px auto;
+    width: max-content;
+    padding: 10px;
+    background-color: #99BC85;
+    border-radius: 25px;
+    font-size: 25px;
+    & select {
+        background-color: #BFD8AF;
+        width: max-content;
+        padding: 10px;
+        border-radius: 25px;
+        transition-duration: 0.2s;
+        &:hover {
+            cursor: pointer;
+            background-color: #D4E7C5;
+        }
+    }
+    & input {
+        border-radius: 25px;
+        padding: 10px;
+        width: 100px;
+        transition-duration: 0.2s;
+        background-color: #BFD8AF;
+        margin: auto 10px;
+        &:hover {
+            cursor: pointer;
+            background-color: #D4E7C5;
+
+        }
+    }
+}
+
+.food_intake {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 25px;
+    margin: 10px 50px;
+    & > h2 {
+        padding: 15px;
+    }
+}
+
+.food_name {
+    background-color: #99BC85;
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+    width: 250px;
+    text-align: center;
+}
+
+.remove_food {
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
+    background-color: #99BC85;
+    padding: 18px;
+    font-size: 20px;
+    width: 150px;
+    transition-duration: 0.2s;
+    &:hover {
+        cursor: pointer;
+        background-color: #BFD8AF;
+    }
+    border: none;
+}
+
+.no_food {
+    background-color: #99BC85;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 25px;
+    transition-duration: 0.2s;
+    width: max-content;
+    margin: 150px auto;
+    &:hover {
+        background-color: #BFD8AF;
+        cursor: pointer;
+    }
+}
+
+

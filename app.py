@@ -104,9 +104,7 @@ def edit_food(food_id: int):
         helper.edit_food(db=db, food_id=food_id, food_name=food_name, protein=food_protein, carbs=food_carbs, fat=food_fat, calories=food_cals)
         return redirect(url_for('food_catalogue'))
     # # GET REQUEST
-    print(food_id)
     food = dict(helper.query_food(db=db, food_id=food_id))
-    print(food)
     return render_template('edit_food.html',
                            title='Edit Food',
                            food=food)
@@ -143,14 +141,12 @@ def add_day():
         if request.form.get('food_id') is not None:
             date = request.form.get('date', type=str)
             food_id = request.form.get('food_id', type=int)
-            print('here', date, food_id)
             helper.delete_food(db=db, id=food_id, date=date)
             return redirect(url_for('add_day', date=date))
         # # ADD FOOD TO A DATE INTAKE
         food_id = request.form.get('food', type=str)
         date = request.form.get('date', type=str)
         helper.insert_intake(db=db, food_id=food_id, date=date)
-        print(food_id, date)
         return redirect(url_for('add_day', date=date))
     date = request.args.get('date', type=str, default=None)
     # # NO DATE WAS PROVIDED BY THE USER
@@ -159,13 +155,9 @@ def add_day():
         return redirect(url_for('home'))
     # # QUERY THE DB FOR THE PROVIDED DATE
     result = helper.query_db_date(db=db, date=date)
-    # print("date: ", date, " intake", dict(result[0]))
     # # QUERY THE DB FOR ALL THE AVAILABLE FOODS
     foods = helper.query_all_foods(db=db)
-    print("all foods: ", foods)
-    print("date result: ", helper.convert_result_to_dict(result))
     aggregate = helper.aggregate_values(db=db, result=result)
-    print(aggregate)
     return render_template('add_day.html',
                            title='Add Day',
                            date=date,
