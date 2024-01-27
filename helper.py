@@ -49,8 +49,8 @@ def query_db_date(db, date: str) -> List:
     """
     cursor = db.execute(f"""
         SELECT * FROM INTAKE 
-            WHERE date = '{date}';
-    """)
+            WHERE date = ?
+    """, [date])
     # # FETCH ALL RESULTS
     results = cursor.fetchall()
     return results
@@ -111,13 +111,32 @@ def insert_intake(**kwargs):
     db.commit()
 
 
-def query_food(db, food_id):
+def query_food(db, food_id: int) -> List:
+    """
+    Queries the FOODS table and returns the results
+    :param db: DB connection instance
+    :param food_id: food_id from the foods table
+    :return: List of the results of the query
+    """
     cursor = db.execute(f"""
         SELECT * FROM FOODS
             WHERE id = '{food_id}';
     """)
     results = cursor.fetchone()
     return results
+
+
+def get_all_dates(db) -> List:
+    """
+    Queries the INTAKE table to get all the dates
+    :param db: DB connection instance
+    :return: List of all available dates
+    """
+    cursor = db.execute("""
+        SELECT DISTINCT date FROM INTAKE ORDER BY date DESC;
+    """)
+    result = cursor.fetchall()
+    return result
 
 
 def edit_food(**kwargs):
@@ -131,7 +150,8 @@ def edit_food(**kwargs):
         UPDATE FOODS
             SET name = ?, protein = ?, carbohydrates = ?, fat = ?, calories = ?
         WHERE id = ?
-    """, [kwargs['food_name'], kwargs['protein'], kwargs['carbs'], kwargs['fat'], kwargs['calories'], kwargs['food_id']])
+    """, [kwargs['food_name'], kwargs['protein'], kwargs['carbs'], kwargs['fat'], kwargs['calories'],
+          kwargs['food_id']])
     db.commit()
 
 
@@ -165,12 +185,9 @@ def aggregate_values(db, result: List) -> Dict:
     if len(result) == 0 or result[0] is None:
         return agg_values
     for food in convert_result_to_dict(result):
-        print('food: ', food)
         temp_food = dict(query_food(db=db, food_id=food.get('food_id')))
         agg_values["count"] += 1
         agg_values["fat"] += temp_food.get('fat')
         agg_values["protein"] += temp_food.get('protein')
         agg_values["carbs"] += temp_food.get('carbohydrates')
     return agg_values
-
-
