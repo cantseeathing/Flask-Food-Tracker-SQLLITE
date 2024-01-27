@@ -72,6 +72,36 @@ def food_catalogue():
                            foods=foods)
 
 
+@app.route('/edit_food', methods=['GET'], defaults={'food_id': None})
+@app.route('/edit_food/', methods=['GET'], defaults={'food_id': None})
+@app.route('/edit_food/<int:food_id>', methods=['GET', 'POST'])
+def edit_food(food_id: int):
+    """
+    Edit an existing food item in the FOODS table
+    """
+    # # GET DB INSTANCE
+    db = get_db()
+    # # IF NO FOOD ID IS PASSED THEN TAKE THE USER BACK TO THE FOOD CATALOGUE
+    if food_id is None:
+        return redirect(url_for('food_catalogue'))
+    # # POST REQUEST
+    if request.method == 'POST':
+        # # GET THE FOOD NAME, PROTEIN, CARBS, AND FAT VALUE FROM THE FORM
+        food_name = request.form.get('food_name', type=str, default='Unnamed Food')
+        food_protein = request.form.get('food_protein', type=int, default=0)
+        food_carbs = request.form.get('food_carbs', type=int, default=0)
+        food_fat = request.form.get('food_fat', type=int, default=0)
+        food_cals = request.form.get('food_cal', type=int, default=0)
+        # # EDIT FOODS TABLE
+        helper.edit_food(db=db, food_id=food_id, food_name=food_name, protein=food_protein, carbs=food_carbs, fat=food_fat, calories=food_cals)
+        return redirect(url_for('food_catalogue'))
+    # # GET REQUEST
+    print(food_id)
+    food = dict(helper.query_food(db=db, food_id=food_id))
+    print(food)
+    return render_template('edit_food.html',
+                           title='Edit Food',
+                           food=food)
 
 
 @app.route('/add_food', methods=['GET', 'POST'])
@@ -83,19 +113,14 @@ def add_food():
     db = get_db()
     # # POST REQUEST
     if request.method == 'POST':
-        # # CHECK IF THE FORM RETURNS FOOD ID FIELD THEN THE USER WANTS TO EDIT FOOD VALUES
-        if request.form.get('food_id') is not None:
-            print(request.form.get('food_id'))
-        # # NO FOOD ID FIELD
-        else:
-            # # GET THE FOOD NAME, PROTEIN, CARBS, AND FAT VALUE FROM THE FORM
-            food_name = request.form.get('food_name', type=str, default='Unnamed Food')
-            food_protein = request.form.get('food_protein', type=int, default=0)
-            food_carbs = request.form.get('food_carbs', type=int, default=0)
-            food_fat = request.form.get('food_fat', type=int, default=0)
-            food_cals = request.form.get('food_cal', type=int, default=0)
-            # # INSERT THE FOOD TO THE FOODS TABLE
-            helper.insert_food(food_name, food_protein, food_carbs, food_fat, food_cals, db=db)
+        # # GET THE FOOD NAME, PROTEIN, CARBS, AND FAT VALUE FROM THE FORM
+        food_name = request.form.get('food_name', type=str, default='Unnamed Food')
+        food_protein = request.form.get('food_protein', type=int, default=0)
+        food_carbs = request.form.get('food_carbs', type=int, default=0)
+        food_fat = request.form.get('food_fat', type=int, default=0)
+        food_cals = request.form.get('food_cal', type=int, default=0)
+        # # INSERT THE FOOD TO THE FOODS TABLE
+        helper.insert_food(food_name, food_protein, food_carbs, food_fat, food_cals, db=db)
         # # RETURN THE USER TO THE FOOD CATALOGUE PAGE
         return redirect(url_for('food_catalogue'))
     return render_template('add_food.html',

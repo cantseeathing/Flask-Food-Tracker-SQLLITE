@@ -14,40 +14,40 @@
             <h1>Food Details</h1>
         </div>
         <div class="add_food_content_details">
-            <form method="POST" action="{{ url_for('add_food') }}" >
+            <form method="POST" action="{{ url_for('edit_food', food_id=food.id) }}" >
                 <ul>
                     <li>
                         <div class="add_food_form_row">
                             <label for="food_name">Food Name</label>
-                            <input autocomplete="off" type="text" name="food_name" id="food_name" autofocus>
+                            <input autocomplete="off" type="text" name="food_name" id="food_name" autofocus value="{{ food.name }}">
                         </div>
                     </li>
                     <li>
                         <div class="add_food_form_row">
                             <label for="food_protein">Protein</label>
-                            <input autocomplete="off" type="number" name="food_protein" id="food_protein" value="0">
+                            <input autocomplete="off" type="number" name="food_protein" id="food_protein" value="{{ food.protein }}">
                         </div>
                     </li>
                     <li>
                         <div class="add_food_form_row">
                             <label for="food_carbs">Carbohydrates</label>
-                            <input autocomplete="off" type="number" name="food_carbs" id="food_carbs" value="0">
+                            <input autocomplete="off" type="number" name="food_carbs" id="food_carbs" value="{{ food.carbohydrates }}">
                         </div>
                     </li>
                     <li>
                         <div class="add_food_form_row">
                             <label for="food_fat">Fat</label>
-                            <input autocomplete="off" type="number" name="food_fat" id="food_fat" value="0">
+                            <input autocomplete="off" type="number" name="food_fat" id="food_fat" value="{{ food.fat }}">
                         </div>
                     </li>
                     <li>
                         <div class="add_food_form_row">
                             <label for="food_fat">Calories</label>
-                            <input autocomplete="off" type="number" name="food_cal" id="food_cal" value="0" disabled>
+                            <input autocomplete="off" type="number" name="food_cal" id="food_cal" value="{{ food.calories }}" disabled>
                         </div>
                     </li>
                 </ul>
-                <input class="add_food_button" type="submit" value="Add">
+                <input class="add_food_button" type="submit" value="Edit">
             </form>
         </div>
     </div>
