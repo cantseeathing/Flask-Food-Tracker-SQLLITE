@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block css_style %}
-    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/homepage.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/add_day.css') }}">
 {% endblock %}
 
 {% block title %}
@@ -10,19 +10,22 @@
 
 {% block content %}
     <div>
-        <div>
-            <h1>Total Intake for {{ date }}</h1>
-            <h2>Number of Meals: {{ aggregate.get('count') }}</h2>
-            <h2>Protein Count: {{ aggregate.get('protein') }}</h2>
-            <h2>Carbohydrates Count: {{ aggregate.get('carbs') }}</h2>
-            <h2>Fat Count: {{ aggregate.get('fat') }}</h2>
+        <div draggable="true" class="day_stats">
+            <h2 class="stats_date">{{ date }} Statistics</h2>
+            <h2>Meals Count: {{ aggregate.get('count') }}</h2>
+            <h2>Protein Total: {{ aggregate.get('protein') }}</h2>
+            <h2>Carbohydrates Total: {{ aggregate.get('carbs') }}</h2>
+            <h2>Fat Total: {{ aggregate.get('fat') }}</h2>
+            <h2>Total Calories: {{ aggregate.get('calories') }}</h2>
         </div>
         {% if foods|length == 0 %}
             <div>
-                <h1>There are no available foods, start by adding foods by clicking <a href="{{ url_for('add_food') }}"><em>here</em></a></h1>
+                <a href="{{ url_for('add_food') }}">
+                    <h1 class="no_food">There are no available foods, start adding foods by clicking <em>here</em></h1>
+                </a>
             </div>
         {% else %}
-            <form action="{{ url_for('add_day') }}" method="POST">
+            <form class="add_food" action="{{ url_for('add_day') }}" method="POST">
                 <label for="food">Select Food to add from the list:
                     <select name="food" id="food">
                         {% for food in foods %}
@@ -41,13 +44,19 @@
                     {% for intake in result %}
                         {% for food in foods %}
                             {% if food.id == intake.food_id %}
-                                <h1>{{ food.name }}</h1>
-                                <h1>{{ food.protein }}</h1>
-                                <h1>{{ food.carbohydrates }}</h1>
-                                <h1>{{ food.fat }}</h1>
-                                <input type="text" name="food_id" value="{{ intake.id }}" hidden>
-                                <input type="text" name="date" value="{{ date }}" hidden>
-                                <input type="submit" value="Remove">
+                                <div draggable="true" class="food_intake">
+                                    <h2 class="food_name">{{ food.name }}</h2>
+                                    <h2>Protein: {{ food.protein }}</h2>
+                                    <h2>|</h2>
+                                    <h2>Carbohydrates: {{ food.carbohydrates }}</h2>
+                                    <h2>|</h2>
+                                    <h2>Fat: {{ food.fat }}</h2>
+                                    <h2>|</h2>
+                                    <h2>Calories: {{ food.calories }}</h2>
+                                    <input type="text" name="food_id" value="{{ intake.id }}" hidden>
+                                    <input type="text" name="date" value="{{ date }}" hidden>
+                                    <input class="remove_food" type="submit" value="Remove">
+                                </div>
                             {% endif %}
                         {% endfor %}
                     {% endfor %}
