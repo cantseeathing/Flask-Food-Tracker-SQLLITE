@@ -33,6 +33,9 @@
         padding: 5px;
         background-color: #BFD8AF;
     }
+    & input:not(.add_food_button) {
+        border-radius: 25px;
+    }
     & form {
         margin: 0px;
     }
