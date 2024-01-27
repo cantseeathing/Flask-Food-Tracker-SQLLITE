@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block css_style %}
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/homepage.css') }}">
+{% endblock %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1 draggable="true" class="error_text">404, an error occurred! :(</h1>
+{% endblock %}

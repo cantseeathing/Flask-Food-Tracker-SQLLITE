@@ -73,7 +73,7 @@ def query_all_foods(db) -> List:
     :param db: DB connection instance
     :return: List of all food
     """
-    cursor = db.execute("SELECT * FROM FOODS ORDER BY name DESC")
+    cursor = db.execute("SELECT * FROM FOODS ORDER BY name ASC")
     # # FETCH ALL THE RESULTS
     results = cursor.fetchall()
     return results
